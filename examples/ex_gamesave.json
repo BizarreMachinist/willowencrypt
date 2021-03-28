@@ -1,0 +1,85 @@
+{
+	"deadend_drive":
+	{
+		"x": "[REDACTED]",
+		"y": 2548787,
+		"z": 98,
+		"found": 1989,
+		"known_oop_count": 2,
+		"known_oops":
+		{
+			"[REDACTED]": "[REDACTED]",
+			"obelisk": "city_hall"
+		},
+		"oop_event_count": 5,
+		"oop_event_hazard":
+		{
+			"case_1": 605,
+			"case_2": 11,
+			"case_3": 1024,
+			"case_4": 626,
+			"case_5": 2451
+		},
+		"other_items":
+		{
+		},
+		"population": 441,
+		"established_points":
+		{
+		},
+		"dips": 3,
+		"defcon": 4,
+		"agents_sent": 5,
+		"agents":
+		{
+			"south":
+			{
+				"location_1": "forrest_edge",
+				"location_2": "sussie's_barn"
+			},
+			"west":
+			{
+				"location_1": "city_hall",
+				"location_2": "[REDACTED]"
+			}
+		},
+		"agents_mia": 1,
+		"agents_kia": "[REDACTED]",
+		"hours_since": 6,
+		"hours_left": 0.5,
+		"section": 2
+	},
+	"navidson_house":
+	{
+		"room":
+		{
+			"stairway":
+			{
+				"steps": "[REDACTED]",
+				"steps_until_repeat": 303,
+				"step_width": 1.2,
+				"color": "#00151C",
+				"days_travel": 2,
+				"samples": "[REDACTED]"
+			}
+		},
+		"map_data":
+		{
+		},
+		"family": 4,
+		"casualties": 0,
+		"hosts": 3,
+		"day": 14.0,
+		"[REDACTED]": "eJxjYKAuAAAAUAAB",
+		"save_location": 3,
+		"enabled": 4,
+		"achievements":
+		{
+		},
+		"platform": 4,
+		"[REDACTED]": "[REDACTED]",
+		"unclocked_run": 10.0,
+		"pinetrees": 14,
+		"show_clock": true
+	}
+}

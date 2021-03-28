@@ -1,0 +1,108 @@
+# Willow Encryption
+
+Willow Encryption is an algorithm that can turn json files into encrypted ascii art.
+
+## DISCLAIMER
+
+DO NOT actually trust the strength of this encryption. I'm not a security expert. I'm not a pentester.
+This program was made for a one off joke, and was never intented to be used for serious applications.
+
+I take no responsibility for files getting cracked, or files failing to decrypt into their exact original states.
+Certainly don't forget the key you used to encrypt. Unless you find a flaw in the encryption process (I can think of a few), I haven't written a way to get that data back.
+
+But certainly, certainly above all else, HAVE FUN!
+
+## Building
+
+### On Linux:
+
+cd [build location]
+
+cmake -S [path to this directory] -B .
+
+make
+
+### On Windows:
+
+cd [build location]
+
+cmake -S [path to this directory] -B .
+
+compile using your editor of choice
+
+### On Mac:
+
+I can't even tell you how to find the file explorer on Mac.
+
+I assume cmake -S [path to this directory] -B . still works
+
+compile using your editor of choice?
+
+### Building without cmake
+
+The program is only 2 files, a main.cpp and a manual.h. As long as you know how to link the nlohmann json library, you could just use the command line to compile this code.
+
+## Installation
+
+DON'T TRY AND INSTALL THIS. Add it the command to path if you really like it for some reason.
+
+## Usage
+
+./willowencrypt -f @ -o [path for output] -e [json file to encrypt] [ascii art] [key] # Creates an encrypted file in the shape of the art by replacing all the '@'s with data
+
+./willowencrypt -o [path for output] -d [encrypted file] [key] # Decrypts a file back into a json file
+
+./willowencrypt -f @ -o [path for output] -m [char to not change] [improper ascii art] # Will turn an image into 'monochrome' (made up of 2 chars), and suitable for the algorithm
+
+./willowencrypt -h # Will tell you much more
+
+## What's in here?
+
+### ex_json.json
+
+An unencrypted json file, like what might be used as a game save file.
+
+### ex_rawArt.png
+
+An image drawn by me that can be put through an online ascii art converter.
+
+Feel free to use this image however you like.
+
+### ex_unconAscii
+
+An ascii image, like what might be generated from an online image to ascii converter.
+This file is NOT ready to be used as a template.
+
+### ex_ascii
+
+An ascii template thats been put through "-m", and is ready to be used as a template.
+
+### ex_willow.lvbn
+
+A file generated containing the json data, using the ascii template, with the key set to "Breadfish".
+
+## Requirements
+
+C++11 or later
+
+Cmake 3.18.4 or later
+
+## Contributing
+
+Pull requests are welcome. Major changes are also welcome. I will make an attempt to keep up with issue reports and suggestions.
+
+This is my first commit. If you have any suggestions on how to improve this, I'll gladly try to update it.
+
+## Comments or Questions?
+
+Got any questions for building, running, or modding? Comments on how I can improve? Let me know on Twitter [@BizarreMac](https://twitter.com/BizarreMac)
+
+## Acknowledgment
+
+Thanks to [CyanSorcery](https://twitter.com/cyansorcery) for the inspiration for this.
+For without her thinking out loud about if she should encrypt her games save files, I would have never wanted to go on an alcohol fueled rampage of making a file in the shape of a fox face.
+
+Thanks to [SushiClaws](https://twitter.com/SUSHiCLAWS) for letting me use its art to show off what this program can do at large scales.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
