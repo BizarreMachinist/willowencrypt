@@ -1,24 +1,8 @@
 /*==============================================
          The Willow encryption algorithm
               By: Galinski Benjamin
-================================================
-==  Stable v1.0.0
-==
-==  This program can take a json file, encrypt
-==    it with a key and turn it into a given
-==    ascii picture using a template.
-==  It can then take an ascii picture and a key,
-==    and construct the original json file.
-==
-==  This program was made for nothing more than
-==    pure fun, and started off as being just
-==    intended to be used as a shitpost towards
-==    the game of Shield Cat, made by
-==    CyanSorcery.
-==  Things got out of hand after some drinks,
-==    and now we're here.
-==  Go play the game, it's pretty fun.
 ==============================================*/
+//  Stable v1.0.1
 
 #include <fstream>
 #include <string>
@@ -29,7 +13,7 @@
 
 #include "mainConfig.hpp"
 #include "nlohmann/json.hpp"
-#include "manual.h"
+#include "manual.hpp"
 
 //===============STRUCTS=======================
 
@@ -39,6 +23,7 @@ struct inputInfo
 	static uint8_t pathToFollow;
 //	static uint16_t level;
 	static char fill;
+	static char replace;
 	static std::string fileTarget;
 	static std::string graphicTarget;
 	static std::string keyTarget;
@@ -49,6 +34,7 @@ struct inputInfo
 		std::cout << "pathToFollow: " << (int)inputInfo::pathToFollow << std::endl;
 //		std::cout << "level: " << (int)inputInfo::level << std::endl;
 		std::cout << "fill: " << inputInfo::fill << std::endl;
+		std::cout << "replace: " << (int)inputInfo::replace << std::endl;
 		std::cout << "fileTarget: " << inputInfo::fileTarget << std::endl;
 		std::cout << "graphicTarget: " << inputInfo::graphicTarget << std::endl;
 		std::cout << "keyTarget: " << inputInfo::keyTarget << std::endl;
@@ -59,6 +45,7 @@ struct inputInfo
 uint8_t inputInfo::pathToFollow = 0;
 //uint16_t inputInfo::level = 5;
 char inputInfo::fill = '@';
+char inputInfo::replace = (char)0;
 std::string inputInfo::fileTarget = "";
 std::string inputInfo::graphicTarget = "";
 std::string inputInfo::keyTarget = "Breadfish";
@@ -133,6 +120,7 @@ bool count(void);
 bool willowEncrypt(void);
 bool varify(void);
 bool monochrome(void);
+bool fileExists(std::string file);
 
 
 //=====================FUNCTIONS==============================
@@ -150,20 +138,24 @@ int main(int argc, char *argv[])
 		if(testVal == "-e" || testVal == "--encryption")
 		{
 			inputInfo::pathToFollow = 1;
-			inputInfo::fileTarget = argv[++i];
-			inputInfo::graphicTarget = argv[++i];
+			if(fileExists(argv[++i])) break;
+			inputInfo::fileTarget = argv[i];
+			if(fileExists(argv[++i])) break;
+			inputInfo::graphicTarget = argv[i];
 			inputInfo::keyTarget = argv[++i];
 		}
 		else if(testVal == "-d" || testVal == "--decrypt")
 		{
 			inputInfo::pathToFollow = 2;
-			inputInfo::fileTarget = argv[++i];
+			if(fileExists(argv[++i])) break;
+			inputInfo::fileTarget = argv[i];
 			inputInfo::keyTarget = argv[++i];
 		}
 		else if(testVal == "-c" || testVal == "--count")
 		{
 			inputInfo::pathToFollow = 3;
-			std::string temp = argv[++i];
+			if(fileExists(argv[++i])) break;
+			std::string temp = argv[i];
 			
 			if(temp.substr(temp.size() - 5) == ".json")
 			{
@@ -176,7 +168,8 @@ int main(int argc, char *argv[])
 			
 			if(i+1 < argc)
 			{
-				temp = argv[++i];
+				if(fileExists(argv[++i])) break;
+				temp = argv[i];
 				if(temp.substr(temp.size() - 5) == ".json")
 				{
 					inputInfo::fileTarget = temp;
@@ -192,7 +185,8 @@ int main(int argc, char *argv[])
 		{
 			inputInfo::pathToFollow = 4;
 			inputInfo::graphicTarget = argv[++i];
-			inputInfo::fileTarget = argv[++i];
+			if(fileExists(argv[++i])) break;
+			inputInfo::fileTarget = argv[i];
 		}
 		//==============FLAGS=======================
 		else if(testVal == "-f" || testVal == "--fill")
@@ -203,13 +197,17 @@ int main(int argc, char *argv[])
 		{
 			inputInfo::outTarget = argv[++i];
 		}
+		else if(testVal == "-r" || testVal == "--replace")
+		{
+			inputInfo::replace = argv[++i][0];
+		}
 		//============OTHER=========================
 		else if(testVal == "-h" || testVal == "--help")
 		{
 			print_man();
 			return 1;
 		}
-		else if(testVal == "-t" || testVal == "--tellmemore")
+		else if(testVal == "-t" || testVal == "--tellmemore!")
 		{
 			tellThemMore();
 			return 1;
@@ -237,6 +235,11 @@ int main(int argc, char *argv[])
 	else if(inputInfo::pathToFollow == 4) //--monochrome
 	{
 		if(monochrome()) return 1;
+	}
+	else if(inputInfo::pathToFollow == 255) //  File not found
+	{
+		noFileExists();
+		return 1;
 	}
 	
 	return 0;
@@ -323,7 +326,12 @@ bool monochrome(void)
 	while(f_graphicOld.get(i))
 	{
 		//if the char you want to NOT change
-		if(i == inputInfo::graphicTarget[0] || i == '\n') f_graphic << i;
+		if(i == inputInfo::graphicTarget[0] || i == '\n')
+		{
+			if(i == '\n') f_graphic << i;
+			else if(inputInfo::replace != (char)0) f_graphic << inputInfo::replace;
+			else f_graphic << i;
+		}
 		//else replace with your fill char
 		else f_graphic << inputInfo::fill;
 	}
@@ -434,5 +442,19 @@ bool varify(void)
 		return 1;
 	}
 	
+	return 0;
+}
+
+//===========================================
+
+bool fileExists(std::string file)
+{
+	std::ifstream f(file, std::ios::in);
+	if(!f.is_open())
+	{
+		inputInfo::pathToFollow = 255;
+		return 1;
+	}
+	f.close();
 	return 0;
 }

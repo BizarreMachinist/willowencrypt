@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18.4)
-set(PROJ_VER 1.0.0)
+set(PROJ_VER 1.0.1)
 set(PROJ_NAME willowencrypt)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED true)

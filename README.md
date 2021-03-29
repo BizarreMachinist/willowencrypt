@@ -1,6 +1,11 @@
 # Willow Encryption
 
-Willow Encryption is an algorithm that can turn json files into encrypted ascii art.
+Welcome to the Willow encryption algorithm!
+Want to take a boring old json file and turn it into a lovely ascii picture that's cuss near impossible to read?
+Want to then extract an entire json from that image?
+Well then mate, keep reading!
+
+![Example](willowencrypt_showcase.png)
 
 ## DISCLAIMER
 
@@ -28,19 +33,19 @@ cd [build location]
 
 cmake -S [path to this directory] -B .
 
-compile using your editor of choice
+compile using your IDE of choice
 
 ### On Mac:
 
 I can't even tell you how to find the file explorer on Mac.
 
-I assume cmake -S [path to this directory] -B . still works
+I assume "cmake -S [path to this directory] -B ." still works
 
-compile using your editor of choice?
+compile using your IDE of choice?
 
 ### Building without cmake
 
-The program is only 2 files, a main.cpp and a manual.h. As long as you know how to link the nlohmann json library, you could just use the command line to compile this code.
+The program is only 2 files, a main.cpp and a manual.hpp. As long as you know how to link the nlohmann json library, you could just use the g++ compiler to compile this code.
 
 ## Installation
 
@@ -48,38 +53,42 @@ DON'T TRY AND INSTALL THIS. Add it the command to path if you really like it for
 
 ## Usage
 
-./willowencrypt -f @ -o [path for output] -e [json file to encrypt] [ascii art] [key] # Creates an encrypted file in the shape of the art by replacing all the '@'s with data
+willowencrypt -f "@" -o [output] -e [json file to encrypt] [ascii art] [key] # Creates an encrypted file in the shape of the art by replacing all the '@'s with data
 
-./willowencrypt -o [path for output] -d [encrypted file] [key] # Decrypts a file back into a json file
+willowencrypt -o [output] -d [encrypted file] [key] # Decrypts a file back into a json file
 
-./willowencrypt -f @ -o [path for output] -m [char to not change] [improper ascii art] # Will turn an image into 'monochrome' (made up of 2 chars), and suitable for the algorithm
+willowencrypt -f "@" -r "." -o [output] -m [char to not change] [improper ascii art] # Will turn an image into 'monochrome' (made up of only 2 chars), and is the best case scenario for the algorithm.
 
-./willowencrypt -h # Will tell you much more
+willowencrypt -h # Will tell you much more
 
 ## What's in here?
 
-### ex_json.json
+### ex_gamesave.json
 
 An unencrypted json file, like what might be used as a game save file.
 
-### ex_rawArt.png
+### ex_rawArt_#.png
 
 An image drawn by me that can be put through an online ascii art converter.
 
 Feel free to use this image however you like.
 
-### ex_unconAscii
+### ex_genAscii_#.txt
 
 An ascii image, like what might be generated from an online image to ascii converter.
-This file is NOT ready to be used as a template.
+This file is NOT in the best case scenario to used as a template. (Although is possible)
 
-### ex_ascii
+### ex_ascii_#.txt
 
 An ascii template thats been put through "-m", and is ready to be used as a template.
 
-### ex_willow.lvbn
+### ex_encrypted_#.lvbn
 
-A file generated containing the json data, using the ascii template, with the key set to "Breadfish".
+A file generated containing the json data, using the ascii template, with the key set to "pinetree".
+
+### ex_decrypted_#.json
+
+The json files that were extracted from the image using the key "pinetree"
 
 ## Requirements
 
@@ -89,9 +98,9 @@ Cmake 3.18.4 or later
 
 ## Contributing
 
-Pull requests are welcome. Major changes are also welcome. I will make an attempt to keep up with issue reports and suggestions.
+Pull requests are welcome. Major changes are also welcome. I will make an attempt to keep up with issue reports and suggestions, but again, this whole thing was a joke.
 
-This is my first commit. If you have any suggestions on how to improve this, I'll gladly try to update it.
+This is my first commit, and my first time using cmake. If you have any suggestions on how to improve this, I'll gladly try to update it.
 
 ## Comments or Questions?
 
@@ -100,9 +109,9 @@ Got any questions for building, running, or modding? Comments on how I can impro
 ## Acknowledgment
 
 Thanks to [CyanSorcery](https://twitter.com/cyansorcery) for the inspiration for this.
-For without her thinking out loud about if she should encrypt her games save files, I would have never wanted to go on an alcohol fueled rampage of making a file in the shape of a fox face.
+For without her thinking out loud about if she should encrypt the save files for her game, I would have never wanted to go on an alcohol fueled rampage of making a file in the shape of a fox face.
 
-Thanks to [SushiClaws](https://twitter.com/SUSHiCLAWS) for letting me use its art to show off what this program can do at large scales.
+Thanks to [SushiClaws](https://twitter.com/SUSHiCLAWS) for letting me use its art to show off what this program can do at large scales. (None of its art is included in this source for ownership reasons)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
