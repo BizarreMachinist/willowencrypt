@@ -1,7 +1,7 @@
 #ifndef MANUAL_H
 #define MANUAL_H
 
-//  Stable v1.0.1
+//  Stable v1.0.2
 
 void print_man(void)
 {
@@ -46,7 +46,7 @@ void print_man(void)
 		"  (-h || --help)              Don't bother, you're already here",
 		"  (-t || --tellmemore!)       But wait, THERE'S MORE!",
 		"",
-		"If something contains a space anywhere in it, qoutations must be used, but it's safer to use them regardless",
+		"If something contains a space anywhere in it, quotations must be used, but it's safer to use them regardless",
 		"==============================================="
 		};
 	
